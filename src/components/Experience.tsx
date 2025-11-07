@@ -1,4 +1,6 @@
+import { OrbitControls } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
+import { Perf } from 'r3f-perf'
 import { useRef } from 'react'
 import { Group, Mesh } from 'three'
 export const Experience = () => {
@@ -10,20 +12,33 @@ export const Experience = () => {
   })
   return (
     <>
-      {/* <OrbitControls></OrbitControls> */}
-      <axesHelper />
-      <mesh position={[0, -1, -2]} rotation-x={-Math.PI * 0.5} scale={5}>
+      <Perf position='top-left'></Perf>
+
+      <OrbitControls />
+
+      <mesh
+        position={[0, -1, -2]}
+        rotation-x={-Math.PI * 0.5}
+        scale={5}
+      >
         <planeGeometry></planeGeometry>
         <meshBasicMaterial color='green'></meshBasicMaterial>
       </mesh>
       <group ref={groupRef}>
-        <mesh position-x={1} scale={0.5} ref={cubeRef}>
+        <mesh
+          position-x={1}
+          scale={0.5}
+          ref={cubeRef}
+        >
           <boxGeometry></boxGeometry>
-          <meshBasicMaterial color='red'></meshBasicMaterial>
+          <meshStandardMaterial color='red'></meshStandardMaterial>
         </mesh>
-        <mesh position-x={-1} scale={0.5}>
+        <mesh
+          position-x={-1}
+          scale={0.5}
+        >
           <sphereGeometry></sphereGeometry>
-          <meshBasicMaterial color='pink'></meshBasicMaterial>
+          <meshStandardMaterial color='pink'></meshStandardMaterial>
         </mesh>
       </group>
     </>
