@@ -1,4 +1,4 @@
-export const light = () => {
+export const Light = () => {
   return (
     <>
       <directionalLight

@@ -3,6 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import { Perf } from 'r3f-perf'
 import { useRef } from 'react'
 import { Group, Mesh } from 'three'
+import { Light } from './Light'
 export const Experience = () => {
   const cubeRef = useRef<Mesh>(null!)
   const groupRef = useRef<Group>(null!)
@@ -15,7 +16,7 @@ export const Experience = () => {
       <Perf position='top-left'></Perf>
 
       <OrbitControls />
-
+      <Light />
       <mesh
         position={[0, -1, -2]}
         rotation-x={-Math.PI * 0.5}
