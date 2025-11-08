@@ -53,7 +53,7 @@ const BlockSpinner = ({ position = [0, 0, 0] }: BlockProps) => {
     const time = state.clock.elapsedTime
     const rotationEuler = euler().set(0, time * speed, 0) // 旋转欧拉角
     const rotationQuaternion = quat().setFromEuler(rotationEuler) // 目标旋转四元数
-    obstacleRef.current.setRotation(rotationQuaternion, true)
+    obstacleRef.current.setNextKinematicRotation(rotationQuaternion)
   })
 
   return (
