@@ -1,6 +1,6 @@
 import { useFrame } from '@react-three/fiber'
 import { RapierRigidBody, RigidBody, euler, quat } from '@react-three/rapier'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 // 定义 Box 组件的 Props 类型
 interface BoxProps {
@@ -42,10 +42,17 @@ const BlockStart = ({ position = [0, 0, 0] }: BlockProps) => {
 
 const BlockSpinner = ({ position = [0, 0, 0] }: BlockProps) => {
   const obstacleRef = useRef<RapierRigidBody>(null!)
+  const [speed] = useState(
+    () => (Math.random() + 0.2) * Math.sign(Math.random() - 0.5)
+  )
+  // Math.sign(Math.random() - 0.5) 会根据这个值返回 -1 或 1。
+  // 如果值小于 0，返回 -1；
+  // 如果值大于或等于 0，返回 1。
   useFrame((state) => {
     if (!obstacleRef.current) return
-    const rotationEuler = euler().set(0, state.clock.elapsedTime, 0)
-    const rotationQuaternion = quat().setFromEuler(rotationEuler)
+    const time = state.clock.elapsedTime
+    const rotationEuler = euler().set(0, time * speed, 0) // 旋转欧拉角
+    const rotationQuaternion = quat().setFromEuler(rotationEuler) // 目标旋转四元数
     obstacleRef.current.setRotation(rotationQuaternion, true)
   })
 
