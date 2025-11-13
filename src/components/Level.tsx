@@ -1,7 +1,13 @@
-import { useGLTF } from '@react-three/drei'
+import { Float, Text, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { RapierRigidBody, RigidBody, euler, quat } from '@react-three/rapier'
-import { useRef, useState } from 'react'
+import {
+  CuboidCollider,
+  RapierRigidBody,
+  RigidBody,
+  euler,
+  quat,
+} from '@react-three/rapier'
+import { useMemo, useRef, useState } from 'react'
 
 // 定义 Box 组件的 Props 类型
 interface BoxProps {
@@ -35,6 +41,22 @@ const BlockStart = ({ position = [0, 0, 0] }: BlockProps) => {
   return (
     <>
       <group position={position}>
+        <Float
+          floatIntensity={0.25}
+          rotationIntensity={0.25}
+        >
+          <Text
+            scale={0.5}
+            maxWidth={0.25}
+            lineHeight={0.75}
+            textAlign='right'
+            position={[0.75, 0.65, 0]}
+            rotation-y={0.25}
+          >
+            Marble Race
+            <meshBasicMaterial toneMapped={false}></meshBasicMaterial>
+          </Text>
+        </Float>
         <Box size={[4, 0.2, 4]} />
       </group>
     </>
@@ -178,14 +200,63 @@ const BlockEnd = ({ position = [0, 0, 0] }: BlockProps) => {
     </>
   )
 }
-export const Level = () => {
+const Bounds = ({ length = 1 }) => {
   return (
     <>
-      <BlockStart position={[0, 0, 16]} />
-      <BlockSpinner position={[0, 0, 12]} />
-      <BlockLimbo position={[0, 0, 8]} />
-      <BlockAxe position={[0, 0, 4]} />
-      <BlockEnd position={[0, 0, 0]} />
+      <RigidBody
+        type='fixed'
+        restitution={0.2}
+        friction={0}
+      >
+        <Box
+          size={[0.3, 1.5, 4 * length]}
+          color='slategrey'
+          position={[2.15, 0.75, -(length * 2) + 2]}
+        />
+        <Box
+          size={[0.3, 1.5, 4 * length]}
+          color='slategrey'
+          position={[-2.15, 0.75, -(length * 2) + 2]}
+        />
+        <Box
+          size={[4, 1.5, 0.3]}
+          color='slategrey'
+          position={[0, 0.75, -(length * 4) + 2]}
+        />
+        <CuboidCollider
+          args={[2, 0.1, 2 * length]}
+          position={[0, -0.1, -(length * 2) + 2]}
+          restitution={0.2}
+          friction={1}
+        />
+      </RigidBody>
+    </>
+  )
+}
+export const Level = ({
+  count = 3,
+  types = [BlockSpinner, BlockAxe, BlockLimbo],
+}) => {
+  const blocks = useMemo(() => {
+    const blocks = []
+    for (let i = 0; i < count; i++) {
+      const type = types[Math.floor(Math.random() * types.length)]
+      blocks.push(type)
+    }
+    return blocks
+  }, [count, types])
+  return (
+    <>
+      <BlockStart position={[0, 0, 0]} />
+      {blocks.map((Block, index) => (
+        <Block
+          key={index}
+          position={[0, 0, -(index + 1) * 4]}
+        />
+      ))}
+
+      <BlockEnd position={[0, 0, -(count + 1) * 4]} />
+      <Bounds length={count + 2} />
     </>
   )
 }
