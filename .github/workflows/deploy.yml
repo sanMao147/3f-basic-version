@@ -1,0 +1,16 @@
+name: Deploy React to GitHub Pages
+on:
+  push:
+    branches: [main] # 监听 main 分支推送
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build project
+        run: npm run build # 构建生产版本
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4 # 部署工具
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # 自动生成的 token
+          publish_dir: ./dist # create-react-app 用 build；Vite 用 dist
