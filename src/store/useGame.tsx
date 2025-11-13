@@ -16,7 +16,7 @@ export type GameState = {
 export const useGame = create<GameState>()(
   subscribeWithSelector((set) => {
     return {
-      blocksCount: 10,
+      blocksCount: 5,
       blocksSeed: 0,
 
       /**
@@ -42,7 +42,12 @@ export const useGame = create<GameState>()(
       restart: () => {
         set((state) => {
           if (state.phase === 'playing' || state.phase === 'ended')
-            return { phase: 'ready', blocksSeed: Math.random() }
+            return {
+              phase: 'ready',
+              blocksSeed: Math.random(),
+              startTime: 0,
+              endTime: 0,
+            }
 
           return {}
         })

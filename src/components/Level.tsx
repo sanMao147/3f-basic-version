@@ -48,7 +48,7 @@ const BlockStart = ({ position = [0, 0, 0] }: BlockProps) => {
           <Text
             scale={0.5}
             maxWidth={0.25}
-            lineHeight={0.75}
+            lineHeight={0.7}
             textAlign='right'
             position={[0.75, 0.65, 0]}
             rotation-y={0.25}
@@ -209,17 +209,17 @@ const Bounds = ({ length = 1 }) => {
         friction={0}
       >
         <Box
-          size={[0.3, 1.5, 4 * length]}
+          size={[0.3, 5.5, 4 * length]}
           color='slategrey'
           position={[2.15, 0.75, -(length * 2) + 2]}
         />
         <Box
-          size={[0.3, 1.5, 4 * length]}
+          size={[0.3, 5.5, 4 * length]}
           color='slategrey'
           position={[-2.15, 0.75, -(length * 2) + 2]}
         />
         <Box
-          size={[4, 1.5, 0.3]}
+          size={[4, 5.5, 0.3]}
           color='slategrey'
           position={[0, 0.75, -(length * 4) + 2]}
         />
@@ -236,6 +236,7 @@ const Bounds = ({ length = 1 }) => {
 export const Level = ({
   count = 3,
   types = [BlockSpinner, BlockAxe, BlockLimbo],
+  seed = 0,
 }) => {
   const blocks = useMemo(() => {
     const blocks = []
@@ -244,7 +245,7 @@ export const Level = ({
       blocks.push(type)
     }
     return blocks
-  }, [count, types])
+  }, [count, types, seed])
   return (
     <>
       <BlockStart position={[0, 0, 0]} />

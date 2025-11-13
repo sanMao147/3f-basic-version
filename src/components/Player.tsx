@@ -72,7 +72,7 @@ export const Player = () => {
       unsubscribeJump?.()
       unsubscribeAnyKey?.()
     }
-  }, [])
+  })
 
   useFrame((state, delta) => {
     /**
@@ -83,7 +83,7 @@ export const Player = () => {
     const impulse = { x: 0, y: 0, z: 0 }
     const torque = { x: 0, y: 0, z: 0 }
 
-    const impulseStrength = 0.6 * delta
+    const impulseStrength = 0.4 * delta
     const torqueStrength = 0.2 * delta
 
     if (forward) {

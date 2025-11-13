@@ -12,10 +12,10 @@ const Interface = () => {
   const leftward = useKeyboardControls((state) => state.leftward)
   const rightward = useKeyboardControls((state) => state.rightward)
   const jump = useKeyboardControls((state) => state.jump)
+  const state = useGame.getState()
 
   useEffect(() => {
     const unsubscribeEffect = addEffect(() => {
-      const state = useGame.getState()
       let elapsedTime = 0
       if (state.phase === 'playing') elapsedTime = Date.now() - state.startTime
       else if (state.phase === 'ended')
@@ -24,7 +24,7 @@ const Interface = () => {
       setTime(elapsedTime.toFixed(2))
     })
     return () => unsubscribeEffect()
-  }, [])
+  }, [state])
 
   return (
     <div className='interface'>
