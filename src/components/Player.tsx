@@ -1,4 +1,4 @@
-import { useKeyboardControls } from '@react-three/drei'
+import { useKeyboardControls, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { RapierRigidBody, RigidBody, useRapier } from '@react-three/rapier'
 import { useEffect, useRef, useState } from 'react'
@@ -15,6 +15,11 @@ export const Player = () => {
   const end = useGame((state) => state.end)
   const restart = useGame((state) => state.restart)
   const blocksCount = useGame((state) => state.blocksCount)
+  const [baseColor, normalMap, roughnessMap] = useTexture([
+    'textures/marble_diff.jpg',
+    'textures/marble_nor.jpg',
+    'textures/marble_rough.jpg',
+  ])
 
   const jump = () => {
     const origin = { ...body.current.translation() }
@@ -150,8 +155,9 @@ export const Player = () => {
       <mesh castShadow>
         <sphereGeometry args={[0.3, 32, 16]}></sphereGeometry>
         <meshStandardMaterial
-          flatShading
-          color='mediumpurple'
+          map={baseColor}
+          normalMap={normalMap}
+          roughnessMap={roughnessMap}
         />
       </mesh>
     </RigidBody>
