@@ -19,7 +19,6 @@ interface BoxProps {
 
 const Box = ({
   size = [1, 1, 1],
-  color = 'limegreen',
   position = [0, -0.1, 0], // 默认位置
   texture,
 }: BoxProps) => {
@@ -31,10 +30,7 @@ const Box = ({
       receiveShadow
     >
       <boxGeometry args={[...size]} /> {/* 解构数组确保类型匹配 */}
-      <meshStandardMaterial
-        color={color}
-        map={textureMap}
-      />
+      <meshStandardMaterial map={textureMap} />
     </mesh>
   )
 }
