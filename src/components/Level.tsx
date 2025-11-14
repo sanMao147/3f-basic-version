@@ -1,4 +1,4 @@
-import { Float, Text, useGLTF } from '@react-three/drei'
+import { Float, Text, useGLTF, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import {
   CuboidCollider,
@@ -8,26 +8,33 @@ import {
   quat,
 } from '@react-three/rapier'
 import { useMemo, useRef, useState } from 'react'
-
+import type { Texture } from 'three'
 // 定义 Box 组件的 Props 类型
 interface BoxProps {
   size?: [number, number, number]
   color?: string
   position?: [number, number, number] // 可选的位置属性
+  texture?: Texture
 }
 
 const Box = ({
   size = [1, 1, 1],
   color = 'limegreen',
   position = [0, -0.1, 0], // 默认位置
+  texture,
 }: BoxProps) => {
+  const floorBase = useTexture('textures/asphalt_diff.jpg')
+  const textureMap = texture ? texture : floorBase
   return (
     <mesh
       position={position}
       receiveShadow
     >
       <boxGeometry args={[...size]} /> {/* 解构数组确保类型匹配 */}
-      <meshStandardMaterial color={color} />
+      <meshStandardMaterial
+        color={color}
+        map={textureMap}
+      />
     </mesh>
   )
 }
@@ -35,6 +42,7 @@ const Box = ({
 // 定义基础块组件的 Props 类型（复用位置属性）
 interface BlockProps {
   position?: [number, number, number]
+  texture?: Texture
 }
 
 const BlockStart = ({ position = [0, 0, 0] }: BlockProps) => {
@@ -201,6 +209,7 @@ const BlockEnd = ({ position = [0, 0, 0] }: BlockProps) => {
   )
 }
 const Bounds = ({ length = 1 }) => {
+  const wallBase = useTexture('textures/wall_diff.jpg')
   return (
     <>
       <RigidBody
@@ -212,16 +221,19 @@ const Bounds = ({ length = 1 }) => {
           size={[0.3, 5.5, 4 * length]}
           color='slategrey'
           position={[2.15, 0.75, -(length * 2) + 2]}
+          texture={wallBase}
         />
         <Box
           size={[0.3, 5.5, 4 * length]}
           color='slategrey'
           position={[-2.15, 0.75, -(length * 2) + 2]}
+          texture={wallBase}
         />
         <Box
           size={[4, 5.5, 0.3]}
           color='slategrey'
           position={[0, 0.75, -(length * 4) + 2]}
+          texture={wallBase}
         />
         <CuboidCollider
           args={[2, 0.1, 2 * length]}
@@ -246,6 +258,7 @@ export const Level = ({
     }
     return blocks
   }, [count, types, seed])
+
   return (
     <>
       <BlockStart position={[0, 0, 0]} />
