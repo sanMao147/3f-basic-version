@@ -7,7 +7,7 @@ const CarRace = lazy(() => import('../pages/CarRace/index'))
 const MarbelRace = lazy(() => import('../pages/MarbelRace/index'))
 const NotFound = lazy(() => import('../pages/NotFound/index'))
 
-const routes = [
+export const routes = [
   {
     path: '/',
     element: <Layout />,
@@ -48,4 +48,3 @@ const routes = [
 
 const router = createBrowserRouter(routes, { basename: '/3f-basic-version/' })
 export default router
-export { routes }
