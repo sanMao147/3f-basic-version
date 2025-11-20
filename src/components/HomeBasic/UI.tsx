@@ -1,6 +1,6 @@
-import { usePageStore } from '../store/PageStore'
+import { usePageStore } from '../../store/usePageStore'
 
-import { pages } from '../constant/Pages'
+import { pages } from '../../constant/Pages'
 
 export const UI = () => {
   const { pageNum, setPageNum } = usePageStore()

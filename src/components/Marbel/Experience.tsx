@@ -1,6 +1,6 @@
 import { OrbitControls } from '@react-three/drei'
 import { Physics } from '@react-three/rapier'
-import { useGame } from '../store/useGame'
+import { useGame } from '../../store/useGame'
 import { Level } from './Level'
 import { Light } from './Light'
 import { Player } from './Player'
