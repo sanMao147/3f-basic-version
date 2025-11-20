@@ -5,7 +5,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "types": ["vite/client"],
+    "types": ["vite/client", "@react-three/fiber", "three"], // 补充 three 相关类型
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -16,6 +16,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* 关键：添加别名配置 */
+    "baseUrl": ".", // 基础路径为项目根目录
+    "paths": {
+      "@/*": ["src/*"] // @ 映射到 src 目录下所有文件
+    },
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -24,5 +30,6 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules", "src/**/*.spec.ts", "src/**/*.test.ts"] // 补充排除测试文件（可选）
 }

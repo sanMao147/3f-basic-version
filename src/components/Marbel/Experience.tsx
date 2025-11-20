@@ -1,6 +1,5 @@
-import { OrbitControls } from '@react-three/drei'
+import { useGame } from '@/store/useGame'
 import { Physics } from '@react-three/rapier'
-import { useGame } from '../../store/useGame'
 import { Level } from './Level'
 import { Light } from './Light'
 import { Player } from './Player'
@@ -11,7 +10,7 @@ export const Experience = () => {
   return (
     <>
       {/* <Perf position='top-left' /> */}
-      <OrbitControls />
+      {/* <OrbitControls /> */}
       <Physics>
         <Light />
         <Level

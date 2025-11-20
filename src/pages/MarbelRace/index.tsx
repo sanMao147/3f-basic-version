@@ -1,7 +1,5 @@
+import MarbelBasic from '../../components/Marbel'
+
 export default function Marbel() {
-  return (
-    <>
-      <div className='text-white'>Marbel-race</div>
-    </>
-  )
+  return <MarbelBasic />
 }

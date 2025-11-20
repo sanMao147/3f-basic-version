@@ -1,9 +1,12 @@
+import marbleDiff from '@/assets/textures/marble_diff.jpg'
+import marbleNor from '@/assets/textures/marble_nor.jpg'
+import marbleRough from '@/assets/textures/marble_rough.jpg'
+import { useGame } from '@/store/useGame'
 import { useKeyboardControls, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { RapierRigidBody, RigidBody, useRapier } from '@react-three/rapier'
 import { useEffect, useRef, useState } from 'react'
 import { Vector3 } from 'three'
-import { useGame } from '../store/useGame'
 
 export const Player = () => {
   const body = useRef<RapierRigidBody>(null!)
@@ -16,9 +19,9 @@ export const Player = () => {
   const restart = useGame((state) => state.restart)
   const blocksCount = useGame((state) => state.blocksCount)
   const [baseColor, normalMap, roughnessMap] = useTexture([
-    'textures/marble_diff.jpg',
-    'textures/marble_nor.jpg',
-    'textures/marble_rough.jpg',
+    marbleDiff,
+    marbleNor,
+    marbleRough,
   ])
 
   const jump = () => {

@@ -11,6 +11,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'), // 指向 src 目录
     },
   },
+  assetsInclude: ['**/*.glb', '**/*.gltf'],
   server: {
     proxy: {
       '/api': {

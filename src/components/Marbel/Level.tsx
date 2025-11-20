@@ -1,3 +1,6 @@
+import hamburgerGlb from '@/assets/model/hamburger.glb'
+import asphaltDiff from '@/assets/textures/asphalt_diff.jpg'
+import wallDiff from '@/assets/textures/wall_diff.jpg'
 import { Float, Text, useGLTF, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import {
@@ -8,7 +11,7 @@ import {
   quat,
 } from '@react-three/rapier'
 import { useMemo, useRef, useState } from 'react'
-import type { Texture } from 'three'
+import type { Mesh, Texture } from 'three'
 // 定义 Box 组件的 Props 类型
 interface BoxProps {
   size?: [number, number, number]
@@ -16,13 +19,12 @@ interface BoxProps {
   position?: [number, number, number] // 可选的位置属性
   texture?: Texture
 }
-
 const Box = ({
   size = [1, 1, 1],
   position = [0, -0.1, 0], // 默认位置
   texture,
 }: BoxProps) => {
-  const floorBase = useTexture('textures/asphalt_diff.jpg')
+  const floorBase = useTexture(asphaltDiff)
   const textureMap = texture ? texture : floorBase
   return (
     <mesh
@@ -180,8 +182,8 @@ const BlockAxe = ({ position = [0, 0, 0] }: BlockProps) => {
   )
 }
 const BlockEnd = ({ position = [0, 0, 0] }: BlockProps) => {
-  const hamburger = useGLTF('./model/hamburger.glb')
-  hamburger.scene.children.forEach((mesh) => {
+  const hamburger = useGLTF(hamburgerGlb)
+  hamburger.scene.children.forEach((mesh: Mesh) => {
     mesh.castShadow = true
   })
   return (
@@ -205,7 +207,7 @@ const BlockEnd = ({ position = [0, 0, 0] }: BlockProps) => {
   )
 }
 const Bounds = ({ length = 1 }) => {
-  const wallBase = useTexture('textures/wall_diff.jpg')
+  const wallBase = useTexture(wallDiff)
   return (
     <>
       <RigidBody

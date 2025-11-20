@@ -31,7 +31,7 @@ const LayoutContent = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className='relative min-h-screen bg-[radial-gradient(#5a47ce,#232323_80%)]'>
-      <main className='p-4 text-white/90 backdrop-blur-sm'>{children}</main>
+      <main>{children}</main>
 
       <div className='fixed right-6 bottom-6 z-50'>
         <button
