@@ -1,4 +1,3 @@
-// LayoutContent.tsx
 import { useMemo, useState } from 'react'
 import { Link, useLocation, useNavigate, useRouteError } from 'react-router-dom'
 import { routes } from '../routes'
@@ -75,20 +74,20 @@ const LayoutContent = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <div className='relative min-h-screen'>
-      <main className='p-4'>{children}</main>
+    <div className='relative min-h-screen bg-[radial-gradient(#5a47ce,#232323_80%)]'>
+      <main className='p-4 text-white/90 backdrop-blur-sm'>{children}</main>
 
       <div className='fixed right-6 bottom-6 z-50'>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className='w-14 h-14 rounded-full bg-red-500 text-white flex items-center justify-center shadow-lg hover:bg-red-600 transition-colors'
+          className='w-16 h-16 rounded-full bg-linear-to-tr from-purple-600 to-indigo-700 text-white flex items-center justify-center shadow-lg shadow-purple-500/30 hover:from-purple-500 hover:to-indigo-600 hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 active:scale-95'
           aria-label={isOpen ? '收起导航' : '展开导航'}
         >
           {isOpen ? '↑' : '☰'}
         </button>
 
         {isOpen && (
-          <div className='absolute bottom-16 right-0 w-48 bg-red-500 rounded-lg shadow-xl p-3 animate-fadeIn'>
+          <div className='absolute bottom-20 right-0 w-52 bg-gray-900/90 backdrop-blur-md rounded-xl border border-purple-500/30 shadow-xl shadow-purple-500/10 p-3 animate-fadeIn'>
             <div className='flex flex-col gap-2'>
               {/* 遍历生成导航按钮 */}
               {navRoutes.map((route) => {
@@ -101,15 +100,15 @@ const LayoutContent = ({ children }: { children: React.ReactNode }) => {
                   <Link
                     key={path}
                     to={path}
-                    className={`px-4 py-2 rounded text-white text-left transition-colors block ${
+                    className={`px-4 py-3 rounded-lg text-white text-left transition-all duration-200 block ${
                       // 404 页面样式：仅首页正常，其余禁用
                       isNotFoundPage
                         ? isHome
-                          ? 'hover:bg-red-600 font-bold' // 404 时首页可点击样式
-                          : 'opacity-50 cursor-not-allowed' // 404 时其他路由禁用样式
+                          ? 'bg-purple-600/90 hover:bg-purple-500 font-bold shadow-md shadow-purple-500/20' // 404 时首页可点击样式
+                          : 'bg-gray-800/70 text-white/50 cursor-not-allowed' // 404 时其他路由禁用样式
                         : isActive
-                        ? 'bg-red-600 font-bold' // 非 404 时活跃路由样式
-                        : 'hover:bg-red-600' // 非 404 时普通样式
+                        ? 'bg-linear-to-r from-purple-600 to-indigo-700 font-bold shadow-md shadow-purple-500/20 border-l-4 border-purple-400' // 非 404 时活跃路由样式
+                        : 'bg-gray-800/50 hover:bg-purple-700/50 hover:text-white' // 非 404 时普通样式
                     }`}
                     onClick={(e) => handleNavClick(route, e)}
                     aria-disabled={isNotFoundPage && !isHome} // 404 时仅首页启用

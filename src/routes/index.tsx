@@ -25,7 +25,7 @@ const routes = [
       {
         path: 'home',
         element: <HomePage />,
-        handle: { title: '回到首页', showInNav: true, isHome: true }, // 关键：首页标记
+        handle: { title: '首页', showInNav: true, isHome: true }, // 关键：首页标记
       },
       {
         path: 'car',
