@@ -1,9 +1,7 @@
-import { lazy, Suspense } from 'react'
-import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
-import Loading from '../components/Loading/index' // 之前的 Tailwind 加载组件
-import GlobalLayout from '../layouts/index' // 全局悬浮布局
+import { lazy } from 'react'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
+import Layout from '../layouts/index'
 
-// 异步加载页面组件
 const HomePage = lazy(() => import('../pages/Home/index'))
 const CarRace = lazy(() => import('../pages/CarRace/index'))
 const MarbelRace = lazy(() => import('../pages/MarbelRace/index'))
@@ -11,14 +9,8 @@ const NotFound = lazy(() => import('../pages/NotFound/index'))
 
 const routes = [
   {
-    path: '/', // 对应 /3f-basic-version/
-    element: (
-      <GlobalLayout>
-        <Suspense fallback={<Loading />}>
-          <Outlet /> {/* 子路由渲染出口（必须保留） */}
-        </Suspense>
-      </GlobalLayout>
-    ),
+    path: '/',
+    element: <Layout />,
     children: [
       {
         index: true,
@@ -29,35 +21,31 @@ const routes = [
           />
         ),
       },
+      // 首页：添加 isHome: true 标记，showInNav: true 显示在导航
       {
         path: 'home',
         element: <HomePage />,
-        meta: { title: '首页' },
+        handle: { title: '回到首页', showInNav: true, isHome: true }, // 关键：首页标记
       },
-      { path: 'car', element: <CarRace />, meta: { title: '极速狂飙' } },
+      {
+        path: 'car',
+        element: <CarRace />,
+        handle: { title: '极速狂飙', showInNav: true }, // 普通导航路由
+      },
       {
         path: 'marbel',
         element: <MarbelRace />,
-        meta: { title: '疯狂的石头' },
+        handle: { title: '疯狂的石头', showInNav: true }, // 普通导航路由
+      },
+      {
+        path: '*',
+        element: <NotFound />,
+        handle: { isNotFound: true, title: '页面未找到' },
       },
     ],
   },
-  // 404 路由
-  {
-    path: '*',
-    element: (
-      <GlobalLayout>
-        <Suspense fallback={<Loading />}>
-          <NotFound />
-        </Suspense>
-      </GlobalLayout>
-    ),
-  },
 ]
 
-// 创建路由
-const router = createBrowserRouter(routes, {
-  basename: '/3f-basic-version/', // 与 vite.config.js 中的 base 保持同步
-})
-
+const router = createBrowserRouter(routes, { basename: '/3f-basic-version/' })
 export default router
+export { routes }
