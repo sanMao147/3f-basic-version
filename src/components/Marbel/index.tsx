@@ -5,7 +5,7 @@ import Interface from './Interface'
 
 export default function MarbelBasic() {
   return (
-    <>
+    <div className='w-full h-screen overflow-hidden'>
       <KeyboardControls
         map={[
           { name: 'forward', keys: ['ArrowUp', 'KeyW'] }, // W 或上箭头 → forward
@@ -15,16 +15,14 @@ export default function MarbelBasic() {
           { name: 'jump', keys: ['Space'] }, // 空格 → jump
         ]}
       >
-        <div className='w-full h-screen overflow-hidden'>
-          <Canvas
-            shadows
-            camera={{ fov: 45, near: 0.1, far: 200, position: [2.5, 4, 6] }}
-          >
-            <Experience />
-          </Canvas>
-        </div>
+        <Canvas
+          shadows
+          camera={{ fov: 45, near: 0.1, far: 200, position: [2.5, 4, 6] }}
+        >
+          <Experience />
+        </Canvas>
         <Interface />
       </KeyboardControls>
-    </>
+    </div>
   )
 }
