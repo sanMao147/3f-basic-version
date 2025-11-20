@@ -1,16 +1,16 @@
-import { KeyboardControls } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
-import { Experience } from './components/Experience'
-import Interface from './components/Interface'
-
+import { RouterProvider } from 'react-router-dom'
+import Loading from './components/Loading'
+import router from './routes/index'
 function App() {
   return (
-    <>
+    <Suspense fallback={<Loading />}>
+      <RouterProvider router={router} />
+
       {/* <UI /> */}
       {/* <Loader /> */}
       {/* 定义键盘映射：按键 -> 状态字段 */}
-      <KeyboardControls
+      {/* <KeyboardControls
         map={[
           { name: 'forward', keys: ['ArrowUp', 'KeyW'] }, // W 或上箭头 → forward
           { name: 'backward', keys: ['ArrowDown', 'KeyS'] }, // S 或下箭头 → back
@@ -28,8 +28,8 @@ function App() {
           </Suspense>
         </Canvas>
         <Interface />
-      </KeyboardControls>
-    </>
+      </KeyboardControls> */}
+    </Suspense>
   )
 }
 
