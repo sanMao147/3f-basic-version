@@ -39,7 +39,7 @@ const LayoutContent = ({ children }: { children: React.ReactNode }) => {
           className='w-16 h-16 rounded-full bg-linear-to-tr from-purple-600 to-indigo-700 text-white flex items-center justify-center shadow-lg shadow-purple-500/30 hover:from-purple-500 hover:to-indigo-600 hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 active:scale-95'
           aria-label={isOpen ? '收起导航' : '展开导航'}
         >
-          {isOpen ? '↑' : '☰'}
+          {isOpen ? '✕' : '☰'}
         </button>
 
         {isOpen && (
