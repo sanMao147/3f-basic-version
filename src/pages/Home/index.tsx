@@ -1,4 +1,4 @@
-import HomeBasic from '../../components/HomeBasic'
+import HomeBasic from '@/components/HomeBasic'
 
 const HomePage = () => {
   return <HomeBasic></HomeBasic>
