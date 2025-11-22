@@ -1,7 +1,7 @@
-import HomeBasic from '@/components/HomeBasic'
+import { Book } from '@/components/Book'
 
 const HomePage = () => {
-  return <HomeBasic></HomeBasic>
+  return <Book></Book>
 }
 
 export default HomePage

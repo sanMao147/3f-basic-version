@@ -1,13 +1,19 @@
-import { usePageStore } from '@/store/usePageStore'
-
-import { pages } from '@/constant/Pages'
-
+import pageflipaudio from '@/assets/audios/page-flip-01a.mp3'
+import { useBookStore } from '@/store/useBookStore'
+import { useEffect } from 'react'
 export const UI = () => {
-  const { pageNum, setPageNum } = usePageStore()
+  const { page, setPage, pages } = useBookStore()
+
+  useEffect(() => {
+    const audio = new Audio(pageflipaudio)
+    audio.play().catch(() => {
+      // 忽略音频播放错误
+    })
+  }, [page])
 
   return (
     <>
-      <main className=' pointer-events-none select-none z-10 fixed  inset-0  flex justify-between flex-col'>
+      <main className='pointer-events-none select-none z-10 fixed inset-0 flex justify-between flex-col'>
         <a
           className='pointer-events-auto mt-10 ml-10 drop-shadow-[0_0_4px_rgba(255,255,255,0.8)]'
           href='https://github.com/sanMao147'
@@ -26,26 +32,26 @@ export const UI = () => {
         </a>
         <div className='w-full overflow-auto pointer-events-auto flex justify-center'>
           <div className='overflow-auto flex items-center gap-4 max-w-full p-10'>
-            {[...pages].map((_, index) => (
+            {pages.map((_, index) => (
               <button
                 key={index}
-                className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border ${
-                  index === pageNum
+                className={`border-transparent hover:border-white transition-all duration-300 px-4 py-3 rounded-full text-lg uppercase shrink-0 border ${
+                  index === page
                     ? 'bg-white/90 text-black'
                     : 'bg-black/30 text-white'
                 }`}
-                onClick={() => setPageNum(index)}
+                onClick={() => setPage(index)}
               >
                 {index === 0 ? 'Cover' : `Page ${index}`}
               </button>
             ))}
             <button
-              className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border ${
-                pageNum === pages.length
+              className={`border-transparent hover:border-white transition-all duration-300 px-4 py-3 rounded-full text-lg uppercase shrink-0 border ${
+                page === pages.length
                   ? 'bg-white/90 text-black'
                   : 'bg-black/30 text-white'
               }`}
-              onClick={() => setPageNum(pages.length)}
+              onClick={() => setPage(pages.length)}
             >
               Back Cover
             </button>
