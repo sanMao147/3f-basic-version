@@ -1,6 +1,6 @@
-import hamburgerGlb from '@/assets/model/hamburger.glb'
-import asphaltDiff from '@/assets/textures/asphalt_diff.jpg'
-import wallDiff from '@/assets/textures/wall_diff.jpg'
+import hamburgerGlb from '@/assets/model/car/hamburger.glb'
+import asphaltDiff from '@/assets/textures/car/asphalt_diff.jpg'
+import wallDiff from '@/assets/textures/car/wall_diff.jpg'
 import { Float, Text, useGLTF, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import {
