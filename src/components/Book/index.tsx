@@ -1,5 +1,4 @@
 import { Canvas } from '@react-three/fiber'
-import { Suspense } from 'react'
 import { Experience } from './Experience'
 import { UI } from './UI'
 
@@ -14,9 +13,8 @@ export const Book = () => {
           fov: 45,
         }}
       >
-        <Suspense fallback={null}>
-          <Experience />
-        </Suspense>
+        <Experience />
+        {/* <DisposeOnUnmount /> */}
       </Canvas>
     </div>
   )

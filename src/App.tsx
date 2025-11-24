@@ -1,7 +1,8 @@
 import { Suspense } from 'react'
 import { RouterProvider } from 'react-router-dom'
 import Loading from './components/Loading'
-import router from './routes/index'
+import router from './routes'
+
 function App() {
   return (
     <Suspense fallback={<Loading />}>
