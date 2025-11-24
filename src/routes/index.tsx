@@ -46,5 +46,7 @@ export const routes = [
   },
 ]
 
-const router = createBrowserRouter(routes, { basename: '/3f-basic-version/' })
+const router = createBrowserRouter(routes, {
+  basename: import.meta.env.BASE_URL,
+})
 export default router
