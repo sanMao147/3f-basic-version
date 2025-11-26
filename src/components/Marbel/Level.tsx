@@ -14,7 +14,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import type { Texture } from 'three'
 import { RepeatWrapping } from 'three'
 
-// 自定义Hook（遵守React Hook规则）- 加载并缓存共享纹理
+//  加载并缓存共享纹理
 const useSharedTextures = () => {
   const [floorTexture, wallTexture] = useTexture([asphaltDiff, wallDiff])
 
@@ -22,7 +22,7 @@ const useSharedTextures = () => {
     // 用useEffect替代useMemo
     floorTexture.wrapS = RepeatWrapping
     floorTexture.wrapT = RepeatWrapping
-    floorTexture.repeat.set(4, 4)
+    floorTexture.repeat.set(1, 1)
 
     wallTexture.wrapS = RepeatWrapping
     wallTexture.wrapT = RepeatWrapping
@@ -127,7 +127,6 @@ const BlockSpinner = ({ position = [0, 0, 0] }: BlockProps) => {
     <group position={position}>
       <Box
         size={[4, 0.2, 4]}
-        color='yellow'
         hasCollider={true}
       />
       <RigidBody
@@ -155,14 +154,17 @@ const BlockLimbo = ({ position = [0, 0, 0] }: BlockProps) => {
     if (!obstacleRef.current) return
     const time = state.clock.elapsedTime
     const y = Math.sin(time + timeOffset) + 1.15
-    obstacleRef.current.setNextKinematicTranslation({ x: 0, y, z: 0 })
+    obstacleRef.current.setNextKinematicTranslation({
+      x: position[0],
+      y: position[1] + y,
+      z: position[2],
+    })
   })
 
   return (
     <group position={position}>
       <Box
         size={[4, 0.2, 4]}
-        color='yellow'
         hasCollider={true}
       />
       <RigidBody
@@ -189,14 +191,17 @@ const BlockAxe = ({ position = [0, 0, 0] }: BlockProps) => {
     if (!obstacleRef.current) return
     const time = state.clock.elapsedTime
     const x = Math.sin(time) * 1.25
-    obstacleRef.current.setNextKinematicTranslation({ x, y: 1.5, z: 0 })
+    obstacleRef.current.setNextKinematicTranslation({
+      x: position[0] + x,
+      y: position[1] + 0.75,
+      z: position[2],
+    })
   })
 
   return (
     <group position={position}>
       <Box
         size={[4, 0.2, 4]}
-        color='yellow'
         hasCollider={true}
       />
       <RigidBody
@@ -227,6 +232,13 @@ const BlockEnd = ({ position = [0, 0, 0] }: BlockProps) => {
 
   return (
     <group position={position}>
+      <Text
+        scale={0.5}
+        position={[0, 2.25, 2]}
+      >
+        FINISH
+        <meshBasicMaterial toneMapped={false} />
+      </Text>
       <Box
         size={[4, 0.2, 4]}
         hasCollider={true}
@@ -258,7 +270,6 @@ const Bounds = ({ length = 1 }) => {
     >
       <Box
         size={[0.3, 5.5, 4 * length]}
-        color='slategrey'
         position={[2.15, 0.75, -(length * 2) + 2]}
         texture={wallTexture}
         hasCollider={true}
@@ -266,7 +277,6 @@ const Bounds = ({ length = 1 }) => {
       />
       <Box
         size={[0.3, 5.5, 4 * length]}
-        color='slategrey'
         position={[-2.15, 0.75, -(length * 2) + 2]}
         texture={wallTexture}
         hasCollider={true}
@@ -274,7 +284,6 @@ const Bounds = ({ length = 1 }) => {
       />
       <Box
         size={[4, 5.5, 0.3]}
-        color='slategrey'
         position={[0, 0.75, -(length * 4) + 2]}
         texture={wallTexture}
         hasCollider={true}
@@ -288,7 +297,7 @@ export const Level = ({
   count = 3,
   types = [BlockSpinner, BlockAxe, BlockLimbo],
 }) => {
-const blocks = useMemo(() => {
+  const blocks = useMemo(() => {
     const blocks = []
 
     for (let i = 0; i < count; i++) {
@@ -302,13 +311,16 @@ const blocks = useMemo(() => {
   return (
     <>
       <BlockStart position={[0, 0, 0]} />
+
       {blocks.map((Block, index) => (
         <Block
           key={index}
           position={[0, 0, -(index + 1) * 4]}
         />
       ))}
+
       <BlockEnd position={[0, 0, -(count + 1) * 4]} />
+
       <Bounds length={count + 2} />
     </>
   )

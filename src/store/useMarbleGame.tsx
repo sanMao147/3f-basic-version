@@ -16,7 +16,7 @@ export type GameState = {
 export const useMarbleGame = create<GameState>()(
   subscribeWithSelector((set) => {
     return {
-      blocksCount: 5,
+      blocksCount: 8,
       blocksSeed: 0,
 
       /**
