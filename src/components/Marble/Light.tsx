@@ -24,7 +24,7 @@ export const Light = () => {
         shadow-camera-bottom={-10}
         shadow-camera-left={-10}
       />
-      <ambientLight intensity={4} />
+      <ambientLight intensity={2} />
     </>
   )
 }
