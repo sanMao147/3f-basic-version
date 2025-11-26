@@ -10,24 +10,23 @@ import {
   euler,
   quat,
 } from '@react-three/rapier'
-import { useEffect, useMemo, useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import type { Texture } from 'three'
-import { RepeatWrapping } from 'three'
 
 //  加载并缓存共享纹理
 const useSharedTextures = () => {
   const [floorTexture, wallTexture] = useTexture([asphaltDiff, wallDiff])
 
-  useEffect(() => {
-    // 用useEffect替代useMemo
-    floorTexture.wrapS = RepeatWrapping
-    floorTexture.wrapT = RepeatWrapping
-    floorTexture.repeat.set(1, 1)
+  // useEffect(() => {
+  //   // 用useEffect替代useMemo
+  //   floorTexture.wrapS = RepeatWrapping
+  //   floorTexture.wrapT = RepeatWrapping
+  //   floorTexture.repeat.set(1, 1)
 
-    wallTexture.wrapS = RepeatWrapping
-    wallTexture.wrapT = RepeatWrapping
-    wallTexture.repeat.set(8, 8)
-  }, [floorTexture, wallTexture])
+  //   wallTexture.wrapS = RepeatWrapping
+  //   wallTexture.wrapT = RepeatWrapping
+  //   wallTexture.repeat.set(8, 8)
+  // }, [floorTexture, wallTexture])
 
   return { floorTexture, wallTexture }
 }
