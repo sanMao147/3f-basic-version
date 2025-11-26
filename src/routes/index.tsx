@@ -4,7 +4,7 @@ import Layout from '../layouts/index'
 
 const HomePage = lazy(() => import('../pages/Home/index'))
 const CarRace = lazy(() => import('../pages/CarRace/index'))
-const MarbelRace = lazy(() => import('../pages/MarbelRace/index'))
+const MarbleRace = lazy(() => import('../pages/MarbleRace/index'))
 const NotFound = lazy(() => import('../pages/NotFound/index'))
 
 export const routes = [
@@ -33,8 +33,8 @@ export const routes = [
         handle: { title: '极速狂飙', showInNav: true }, // 普通导航路由
       },
       {
-        path: 'marbel',
-        element: <MarbelRace />,
+        path: 'marble',
+        element: <MarbleRace />,
         handle: { title: '疯狂的石头', showInNav: true }, // 普通导航路由
       },
       {

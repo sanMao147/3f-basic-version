@@ -5,7 +5,7 @@ import { CanvasLoadingProgress } from '../Loading/CanvasProgress'
 import { Experience } from './Experience'
 import Interface from './Interface'
 
-export default function MarbelBasic() {
+export default function MarbleBasic() {
   return (
     <div className='w-full h-screen overflow-hidden'>
       <KeyboardControls
