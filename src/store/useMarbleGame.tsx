@@ -13,7 +13,7 @@ export type GameState = {
   end: () => void
 }
 
-export const useGame = create<GameState>()(
+export const useMarbleGame = create<GameState>()(
   subscribeWithSelector((set) => {
     return {
       blocksCount: 5,

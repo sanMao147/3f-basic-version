@@ -1,7 +1,7 @@
 import marbleDiff from '@/assets/textures/marble/marble_diff.jpg'
 import marbleNor from '@/assets/textures/marble/marble_nor.jpg'
 import marbleRough from '@/assets/textures/marble/marble_rough.jpg'
-import { useGame } from '@/store/useGame'
+import { useMarbleGame } from '@/store/useMarbleGame'
 import { useKeyboardControls, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { RapierRigidBody, RigidBody, useRapier } from '@react-three/rapier'
@@ -14,10 +14,10 @@ export const Player = () => {
   const { rapier, world } = useRapier()
   const [smoothedCameraPosition] = useState(() => new Vector3(10, 10, 10))
   const [smoothedCameraTarget] = useState(() => new Vector3())
-  const start = useGame((state) => state.start)
-  const end = useGame((state) => state.end)
-  const restart = useGame((state) => state.restart)
-  const blocksCount = useGame((state) => state.blocksCount)
+  const start = useMarbleGame((state) => state.start)
+  const end = useMarbleGame((state) => state.end)
+  const restart = useMarbleGame((state) => state.restart)
+  const blocksCount = useMarbleGame((state) => state.blocksCount)
   const [baseColor, normalMap, roughnessMap] = useTexture([
     marbleDiff,
     marbleNor,
@@ -45,7 +45,7 @@ export const Player = () => {
   useEffect(() => {
     // 1. 合并订阅变量名，明确订阅目的
     // 订阅游戏阶段变化：当进入"ready"阶段时重置
-    const unsubscribePhase = useGame.subscribe(
+    const unsubscribePhase = useMarbleGame.subscribe(
       (state) => state.phase,
       (phase) => {
         if (phase === 'ready') {

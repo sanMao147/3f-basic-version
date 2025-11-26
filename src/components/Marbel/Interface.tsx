@@ -1,18 +1,18 @@
-import { useGame } from '@/store/useGame'
+import { useMarbleGame } from '@/store/useMarbleGame'
 import { useKeyboardControls } from '@react-three/drei'
 import { addEffect } from '@react-three/fiber'
 import { useEffect, useState } from 'react'
 
 const Interface = () => {
   const [time, setTime] = useState<string>('0.00')
-  const restart = useGame((state) => state.restart)
-  const phase = useGame((stata) => stata.phase)
+  const restart = useMarbleGame((state) => state.restart)
+  const phase = useMarbleGame((stata) => stata.phase)
   const forward = useKeyboardControls((state) => state.forward)
   const backward = useKeyboardControls((state) => state.backward)
   const leftward = useKeyboardControls((state) => state.leftward)
   const rightward = useKeyboardControls((state) => state.rightward)
   const jump = useKeyboardControls((state) => state.jump)
-  const state = useGame.getState()
+  const state = useMarbleGame.getState()
 
   useEffect(() => {
     const unsubscribeEffect = addEffect(() => {

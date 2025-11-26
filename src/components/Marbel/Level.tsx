@@ -287,24 +287,17 @@ const Bounds = ({ length = 1 }) => {
 export const Level = ({
   count = 3,
   types = [BlockSpinner, BlockAxe, BlockLimbo],
-  seed = 0,
 }) => {
-  const blocks = useMemo(() => {
-    const rng = (() => {
-      let currentSeed = seed
-      return () => {
-        currentSeed = (currentSeed * 1664525 + 1013904223) % 2 ** 32
-        return currentSeed / 2 ** 32
-      }
-    })()
-
+const blocks = useMemo(() => {
     const blocks = []
+
     for (let i = 0; i < count; i++) {
-      const randomIndex = Math.floor(rng() * types.length)
-      blocks.push(types[randomIndex])
+      const type = types[Math.floor(Math.random() * types.length)]
+      blocks.push(type)
     }
+
     return blocks
-  }, [count, types, seed])
+  }, [count, types])
 
   return (
     <>
