@@ -1,6 +1,7 @@
 import { KeyboardControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
+import { CanvasLoadingProgress } from '../Loading/CanvasProgress'
 import { Experience } from './Experience'
 import Interface from './Interface'
 
@@ -25,6 +26,7 @@ export default function MarbelBasic() {
           </Suspense>
         </Canvas>
         <Interface />
+        <CanvasLoadingProgress />
       </KeyboardControls>
     </div>
   )

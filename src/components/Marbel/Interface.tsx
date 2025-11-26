@@ -27,7 +27,7 @@ const Interface = () => {
   }, [state])
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full pointer-events-none font-['Bebas_Neue',cursive]">
+    <div className="fixed top-0 left-0 w-full h-full pointer-events-none font-['Bebas_Neue',cursive] z-10">
       {/* Time 时间显示 */}
       <div className='absolute top-[15%] left-0 w-full text-white text-[6vh] bg-black/20 py-1.5 text-center'>
         {time}

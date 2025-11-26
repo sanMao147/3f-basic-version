@@ -2,6 +2,7 @@
 const Loading = () => {
   return (
     <div
+      data-loading-component='true'
       className='fixed inset-0 flex flex-col items-center justify-center 
                     bg-[#232323]/70 backdrop-blur-md z-50 animate-fadeIn'
     >

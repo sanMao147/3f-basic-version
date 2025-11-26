@@ -1,4 +1,5 @@
 import { Canvas } from '@react-three/fiber'
+import { CanvasLoadingProgress } from '../Loading/CanvasProgress'
 import { Experience } from './Experience'
 import { UI } from './UI'
 
@@ -16,6 +17,7 @@ export const Book = () => {
         <Experience />
         {/* <DisposeOnUnmount /> */}
       </Canvas>
+      <CanvasLoadingProgress />
     </div>
   )
 }
