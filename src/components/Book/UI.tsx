@@ -1,6 +1,5 @@
-import pageflipaudio from '@/assets/audios/page-flip-01a.mp3'
 import { useBookStore } from '@/store/useBookStore'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 const ScrollContent = () => {
   return (
@@ -25,50 +24,12 @@ const ScrollContent = () => {
   )
 }
 export const UI = () => {
-  const { page, setPage, pages } = useBookStore()
-  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const { page, pages, setPage } = useBookStore()
 
-  // 优化音频播放逻辑
   useEffect(() => {
-    // 初始化音频实例（只创建一次）
-    if (!audioRef.current) {
-      audioRef.current = new Audio(pageflipaudio)
-      audioRef.current.volume = 0.5 // 可选：调整音量
-    }
-    const playAudio = async () => {
-      if (!audioRef.current) return
-      try {
-        // 停止之前的播放（避免重叠）
-        if (!audioRef.current.paused) {
-          audioRef.current.currentTime = 0
-        }
-        await audioRef.current.play()
-      } catch (err) {
-        console.log('音频播放失败（浏览器限制）:', err)
-      }
-    }
-
-    // 页面变化时播放（排除初始加载时的播放）
-    if (page !== 0 || audioRef.current) {
-      playAudio()
-    }
-
-    // 组件卸载时销毁音频实例（类型安全）
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current = null
-      }
-    }
+    const audio = new Audio('/audios/page-flip-01a.mp3')
+    audio.play()
   }, [page])
-
-  // 安全设置页面（避免 page 越界）
-  const safeSetPage = (targetPage: number) => {
-    const maxPage = pages.length // Back Cover 对应 pages.length
-    if (targetPage >= 0 && targetPage <= maxPage) {
-      setPage(targetPage)
-    }
-  }
 
   return (
     <>
@@ -103,7 +64,7 @@ export const UI = () => {
                     ? 'bg-white/90 text-black'
                     : 'bg-black/30 text-white hover:bg-black/50'
                 }`}
-                onClick={() => safeSetPage(index)}
+                onClick={() => setPage(index)}
               >
                 {index === 0 ? 'Cover' : `Page ${index}`}
               </button>
@@ -115,7 +76,7 @@ export const UI = () => {
                   ? 'bg-white/90 text-black'
                   : 'bg-black/30 text-white hover:bg-black/50'
               }`}
-              onClick={() => safeSetPage(pages.length)}
+              onClick={() => setPage(pages.length)}
             >
               Back Cover
             </button>
