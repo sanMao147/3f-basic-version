@@ -1,1 +1,0 @@
-import{j as e}from"./index-yuHbNPaW.js";function t(){return e.jsx("div",{className:"text-white flex items-center justify-center  text-9xl h-screen",children:"Car Race Comming Soon"})}function n(){return e.jsx(t,{})}export{n as default};
