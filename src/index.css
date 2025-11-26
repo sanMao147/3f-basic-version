@@ -7,8 +7,38 @@
 
 body {
   margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
+@keyframes horizontalScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.horizontalScroll {
+  animation: horizontalScroll linear 20s infinite;
+}
+
 
 .outline-text {
   -webkit-text-stroke: 1px white;
+}
+
+.text-10xl {
+  font-size: 10rem;
+}
+
+.text-11xl {
+  font-size: 11rem;
+}
+
+.text-12xl {
+  font-size: 12rem;
+}
+
+.text-13xl {
+  font-size: 13rem;
 }

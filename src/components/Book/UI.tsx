@@ -86,10 +86,8 @@ export const UI = () => {
 
       <div className='fixed inset-0 flex items-center overflow-hidden -rotate-2 select-none'>
         <div className='flex items-center whitespace-nowrap'>
-          <div className='bg-transparent animate-horizontalScroll flex items-center gap-8 w-max px-8'>
+          <div className='bg-transparent horizontalScroll flex items-center gap-8 w-max px-8'>
             <ScrollContent />
-          </div>
-          <div className='bg-transparent animate-horizontalScroll-2 flex items-center gap-8 w-max px-8'>
             <ScrollContent />
           </div>
         </div>
